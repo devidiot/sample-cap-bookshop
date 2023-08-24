@@ -17,7 +17,9 @@
     "@sap/cds-dk": "^7"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "start-app": "cds bind --exec -- npm start --prefix app",
+    "start-cds": "cds watch --profile hybrid"
   },
   "cds": {
     "requires": {

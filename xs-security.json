@@ -20,8 +20,9 @@
   ],
   "oauth2-configuration": {
     "redirect-uris": [
-      "http://localhost:4004/**",
-      "https://*.cfapps.us10-001.hana.ondemand.com/**"
+      "https://*.cfapps.us10-001.hana.ondemand.com/**",
+      "https://*.applicationstudio.cloud.sap/**",
+      "http://localhost:5001/**"
     ]
   }
 }
