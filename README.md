@@ -9,6 +9,7 @@ cds init sample-cap-bookshop
 
 cd sample-cap-bookshop
 
+cds add sample
 cds add hana
 cds add xsuaa
 cds add approuter
