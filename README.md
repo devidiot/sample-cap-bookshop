@@ -69,10 +69,15 @@ authenticationType을 none으로 지정할 경우 해당 라우팅은 인증하�
 
 
 # 배포 및 실행
+사전에 cf에 login 해야한다.
+
+https://help.sap.com/docs/btp/sap-business-technology-platform/log-on-to-cloud-foundry-environment-using-cloud-foundry-command-line-interface
+
+
 
 ## BTP Cloud Foundry에 배포
 
-CF에 sample-cap-bookshop을 빌드 및 배포한다. 사전에 cf login 해야한다.
+CF에 sample-cap-bookshop을 빌드 및 배포한다.
 
 ```
 mbt build
