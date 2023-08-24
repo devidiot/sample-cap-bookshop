@@ -9,6 +9,7 @@ cds init sample-cap-bookshop
 cds add hana
 cds add xsuaa
 cds add approuter
+cds add mta
 ```
 
 ## XSUAA 구성
