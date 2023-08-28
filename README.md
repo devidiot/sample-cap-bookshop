@@ -100,6 +100,31 @@ cf create-service-key sample-cap-bookshop-auth sample-cap-bookshop-auth-key
 cf create-service-key sample-cap-bookshop-db sample-cap-bookshop-db-key
 ```
 
+혹은 mta.yaml에 XSUAA 및 HDI Container 서비스에 key를 생성하는 설정을 아래와 같이 추가 햐여 배포시 자동으로 service key를 생성할 수 있다.
+```
+resources:
+  - name: sample-cap-bookshop-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+      service-keys:
+        - name: sample-cap-bookshop-db-key
+  - name: sample-cap-bookshop-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: sample-cap-bookshop-${org}-${space}
+        tenant-mode: dedicated
+      service-keys:
+        - name: sample-cap-bookshop-auth-key
+```
+
+
+
 ## 실행
 BTP Cockpit에서 CF에 배포된 Application 'sample-cap-bookshop'을 선택 후 Application Routes URL을 클릭하여 실행한다.
 admin 권한은 없으므로 Browse Books 만 실행 가능하며, Manage Books는 Forbidden 오류가 발생한다.
@@ -168,17 +193,19 @@ cds bind --exec -- npm start --prefix app
 ```
 
 AppRouter의 기본 포트는 5000 번이나 이 포트가 이미 사용중이라면 Port를 변경해야한다.
-app/package.json 파일의 start script에 --port 옵션으로 5001을 추가한다.
+default-env.json 파일에 PORT:5001을 추가한다.
 ```
 {
-  "scripts": {
-    "start": "node node_modules/@sap/approuter/approuter.js --port 5001"
-  }
+    "destinations": [
+        {
+            "name": "srv-api",
+            "url": "http://localhost:4004",
+            "forwardAuthToken": true
+        }
+    ],
+    "PORT": 5001
 }
 ```
-
-**참고로 이 소스는 AppRouter가 5001 포트로 구동하도록 구성되어 있다.**
-
 
 ## OAuth login callback URI 추가 구성
 
@@ -191,7 +218,7 @@ xs-security.json 파일에 OAuth 설정 'oauth2-configuration'의 redirect-uris�
     "redirect-uris": [
       "https://*.cfapps.us10-001.hana.ondemand.com/**",
       "https://*.applicationstudio.cloud.sap/**",
-      "http://localhost:5001/**"
+      "http://localhost:*/**"
     ]
   }
 }
@@ -199,4 +226,7 @@ xs-security.json 파일에 OAuth 설정 'oauth2-configuration'의 redirect-uris�
 
 **xs-security.json을 수정 한 후 이를 반영하기 위해 'sample-cap-bookshop'을 재 배포해야한다. hybrid profile을 구성하여 CF에 바인딩 하여 구동하는 방식이므로 CF에 수정된 xs-security.json이 포함된 'sample-cap-bookshop'이 update되어야 한다.**
 
+**redirect-ruls에 http 프로토콜은 오직 localhost인 경우만 가능하며 127.0.0.1은 허용되지 않는다.**
+
+**localhost의 경우 5000번 포트가 아닐 수 있으므로 포트를 `*`로 처리하여 배포한다.**
 

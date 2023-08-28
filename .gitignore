@@ -3,7 +3,7 @@ _out
 *.db
 *.sqlite
 connection.properties
-default-*.json
+# default-*.json
 #.cdsrc-private.json
 gen/
 node_modules/
@@ -29,6 +29,3 @@ mta_archives/
 # IDEs
 # .vscode
 # .idea
-
-# added by cds
-.cdsrc-private.json
