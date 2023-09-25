@@ -4,6 +4,11 @@
             "name": "srv-api",
             "url": "http://localhost:4004",
             "forwardAuthToken": true
+        },
+        {
+            "name": "starj-libs",
+            "url": "https://b13b2b8dtrial-dev-starj-ui5-lib.cfapps.us10-001.hana.ondemand.com",
+            "forwardAuthToken": true
         }
     ],
     "PORT": 5001

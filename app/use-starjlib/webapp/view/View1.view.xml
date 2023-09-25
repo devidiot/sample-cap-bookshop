@@ -1,0 +1,10 @@
+<mvc:View controllerName="sample.usestarjlib.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:lib-m="starj.m"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <lib-m:Text id="text1" text="Colorful text using starj.m.Text from starj-libs" color="red" />
+        </content>
+    </Page>
+</mvc:View>

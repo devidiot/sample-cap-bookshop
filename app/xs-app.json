@@ -16,6 +16,13 @@
       "authenticationType": "xsuaa"
     },
     {
+      "source": "^/starj/(.*)$",
+      "target": "/starj/$1",
+      "destination": "starj-libs",
+      "csrfProtection": true,
+      "authenticationType": "none"
+    },
+    {
       "source": "^/(.*)$",
       "target": "$1",
       "destination": "srv-api",

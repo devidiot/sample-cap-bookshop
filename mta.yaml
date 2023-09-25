@@ -47,6 +47,12 @@ modules:
           name: srv-api # must be used in xs-app.json as well
           url: ~{srv-url}
           forwardAuthToken: true
+      - name: starj-libs-dest
+        group: destinations
+        properties:
+          name: starj-libs # must be used in xs-app.json as well
+          url: "https://b13b2b8dtrial-dev-starj-ui5-lib.cfapps.us10-001.hana.ondemand.com/"
+          forwardAuthToken: false
       - name: sample-cap-bookshop-auth
 
 resources:
@@ -68,3 +74,21 @@ resources:
         tenant-mode: dedicated
       service-keys:
         - name: sample-cap-bookshop-auth-key
+  - name: starj-libs-dest
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: false
+        init_data:
+          instance:
+            destinations:
+            - Authentication: NoAuthentication
+              Name: starj
+              ProxyType: Internet
+              Type: HTTP
+              URL: https://b13b2b8dtrial-dev-starj-ui5-lib.cfapps.us10-001.hana.ondemand.com/
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-name: starj-libs-dest
+      service-plan: lite
