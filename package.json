@@ -20,7 +20,7 @@
     "scripts": {
         "start": "cds-serve",
         "start:app": "cds bind --exec -- npm start --prefix app",
-        "start:cds": "cds watch --profile hybrid",
+        "start:srv": "cds watch --profile hybrid",
         "undeploy": "cf undeploy sample-cap-bookshop --delete-services --delete-service-keys --delete-service-brokers",
         "build": "rimraf resources mta_archives && mbt build --mtar archive",
         "deploy": "cf deploy mta_archives/archive.mtar --retries 1"

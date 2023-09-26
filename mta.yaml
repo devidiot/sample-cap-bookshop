@@ -51,7 +51,7 @@ modules:
         group: destinations
         properties:
           name: starj-libs # must be used in xs-app.json as well
-          url: "https://b13b2b8dtrial-dev-starj-ui5-lib.cfapps.us10-001.hana.ondemand.com/"
+          url: https://b13b2b8dtrial-dev-starj-ui5-lib.cfapps.us10-001.hana.ondemand.com
           forwardAuthToken: false
       - name: sample-cap-bookshop-auth
 
@@ -77,18 +77,18 @@ resources:
   - name: starj-libs-dest
     type: org.cloudfoundry.managed-service
     parameters:
-      config:
-        HTML5Runtime_enabled: false
-        init_data:
-          instance:
-            destinations:
-            - Authentication: NoAuthentication
-              Name: starj
-              ProxyType: Internet
-              Type: HTTP
-              URL: https://b13b2b8dtrial-dev-starj-ui5-lib.cfapps.us10-001.hana.ondemand.com/
-            existing_destinations_policy: update
-        version: 1.0.0
+      # config:
+      #   HTML5Runtime_enabled: false
+      #   init_data:
+      #     instance:
+      #       destinations:
+      #       - Authentication: NoAuthentication
+      #         Name: starj-libs
+      #         ProxyType: Internet
+      #         Type: HTTP
+      #         URL: https://b13b2b8dtrial-dev-starj-ui5-lib.cfapps.us10-001.hana.ondemand.com/
+      #       existing_destinations_policy: update
+      #   version: 1.0.0
       service: destination
       service-name: starj-libs-dest
       service-plan: lite
